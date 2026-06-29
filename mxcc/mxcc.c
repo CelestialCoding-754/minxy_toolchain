@@ -44,6 +44,46 @@ int*    sym_cap;
 int     sym_current;
 int     sym_tcap;
 
+/*
+TOKEN TYPES
+
+000 -> End of token
+100 -> semicolon
+101 -> identifier
+102 -> number
+103 -> string
+200 -> void
+201 -> int
+202 -> char
+300 -> +
+301 -> -
+302 -> *
+303 -> /
+304 -> %
+305 -> =
+306 -> ~
+307 -> &
+308 -> |
+309 -> ^
+310 -> !
+311 -> &&
+312 -> ||
+313 -> ==
+314 -> !=
+315 -> >
+316 -> <
+317 -> >=
+318 -> <=
+319 -> (
+320 -> )
+321 -> {
+322 -> }
+400 -> if
+401 -> goto
+403 -> return
+
+*/
+
 int strlen(char* str)
 {
     int i = 0;
@@ -156,7 +196,7 @@ int is_term(char c)
     return is_symbol(c);
 }
 
-void token_add(int type, char* strval, int numval)
+void token_add(int type, char* sval, int nval)
 {
     if (token_len >= token_cap)
     {
@@ -165,6 +205,12 @@ void token_add(int type, char* strval, int numval)
         token_nval = realloc(token_nval, token_cap);
         token_sval = realloc(token_sval, token_cap);
     }
+
+    *(token_type + token_len) = type;
+    *(token_nval + token_len) = nval;
+    *(token_sval + token_len) = sval;
+
+    return;
 }
 
 void lexer()
@@ -189,7 +235,7 @@ void lexer()
                 tokval = source + i - toklen;
                 toklen = 0;
 
-                token
+                token_add()
             }
 
             i = i + 1;
