@@ -48,39 +48,39 @@ int     sym_tcap;
 TOKEN TYPES
 
 000 -> End of token
-100 -> semicolon
-101 -> identifier
-102 -> number
-103 -> string
-200 -> void
-201 -> int
-202 -> char
-300 -> +
-301 -> -
-302 -> *
-303 -> /
-304 -> %
-305 -> =
-306 -> ~
-307 -> &
-308 -> |
-309 -> ^
-310 -> !
-311 -> &&
-312 -> ||
-313 -> ==
-314 -> !=
-315 -> >
-316 -> <
-317 -> >=
-318 -> <=
-319 -> (
-320 -> )
-321 -> {
-322 -> }
-400 -> if
-401 -> goto
-403 -> return
+001 -> semicolon
+002 -> identifier
+003 -> number
+004 -> string
+100 -> void
+101 -> int
+102 -> char
+200 -> +
+201 -> -
+202 -> *
+203 -> /
+204 -> %
+205 -> =
+206 -> ~
+207 -> &
+208 -> |
+209 -> ^
+210 -> !
+211 -> &&
+212 -> ||
+213 -> ==
+214 -> !=
+215 -> >
+216 -> <
+217 -> >=
+218 -> <=
+219 -> (
+220 -> )
+221 -> {
+222 -> }
+300 -> if
+301 -> goto
+303 -> return
 
 */
 
@@ -235,8 +235,75 @@ void lexer()
                 tokval = source + i - toklen;
                 toklen = 0;
 
-                token_add()
+                token_add(002, tokval, 0);
             }
+
+            if (c == 43)
+            {
+                token_add(200, 0, 0);
+                goto endif0;
+            }
+            if (c == 45)
+            {
+                token_add(201, 0, 0);
+                goto endif0;
+            }
+            if (c == 42)
+            {
+                token_add(202, 0, 0);
+                goto endif0;
+            }
+            if (c == 47)
+            {
+                token_add(203, 0, 0);
+                goto endif0;
+            }
+            if (c == 37)
+            {
+                token_add(204, 0, 0);
+                goto endif0;
+            }
+            if (c == 61)
+            {
+                token_add(205, 0, 0);
+                goto endif0;
+            }
+            if (c == 126)
+            {
+                token_add(206, 0, 0);
+                goto endif0;
+            }
+            if (c == 38)
+            {
+                token_add(207, 0, 0);
+                goto endif0;
+            }
+            if (c == 124)
+            {
+                token_add(208, 0, 0);
+                goto endif0;
+            }
+            if (c == 94)
+            {
+                token_add(209, 0, 0);
+                goto endif0;
+            }
+            if (c == 33)
+            {
+                token_add(210, 0, 0);
+                goto endif0;
+            }
+            if (c == 123)
+            {
+                token_add(221, 0, 0);
+                goto endif0;
+            }
+            if (c == 125)
+            {
+                token_add(222, 0, 0);
+                goto endif0;
+            }
+            endif0:
 
             i = i + 1;
             goto loop1;
